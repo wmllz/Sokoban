@@ -49,11 +49,12 @@ void Texture::render( int x, int y, SDL_Rect *clip /*= nullptr*/ ){
 	
 	SDL_Rect renderQuad = {x, y, m_width, m_height};
 
-	if (!clip){
+	if (clip != nullptr){
 		renderQuad.w = clip->w;
 		renderQuad.h = clip->h;
 	}
 	gRender.renderCopy(m_texture, clip, &renderQuad);
+	gRender.renderPresent();
 }
 
 void Texture::free(){

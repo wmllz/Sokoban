@@ -79,14 +79,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Cell.cpp" />
+    <ClCompile Include="src\Board.cpp" />
+    <ClCompile Include="src\Cell.cpp" />
+    <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Renderer.cpp" />
     <ClCompile Include="src\SDLUtils.cpp" />
     <ClCompile Include="src\Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Cell.h" />
+    <ClInclude Include="src\Board.h" />
+    <ClInclude Include="src\Cell.h" />
+    <ClInclude Include="src\Game.h" />
     <ClInclude Include="src\Renderer.h" />
     <ClInclude Include="src\SDLUtils.h" />
     <ClInclude Include="src\Texture.h" />

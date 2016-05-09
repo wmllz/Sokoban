@@ -28,6 +28,10 @@ void Renderer::renderCopy( SDL_Texture *texture,
 		SDL_RenderCopy(m_renderer, texture, srcrect, dstrect);
 }
 
+void Renderer::drawRect(const SDL_Rect &rect){
+	SDL_RenderDrawRect(m_renderer, &rect);
+}
+
 void Renderer::renderPresent(){
 	SDL_RenderPresent(m_renderer);
 }

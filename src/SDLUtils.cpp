@@ -1,8 +1,10 @@
 #include "SDLUtils.h"
 
 //全局变量
-const int SCREEN_WIDTH = 640;
-const int SCREEN_HEIGHT = 480;
+const int SCREEN_WIDTH = 800;
+const int SCREEN_HEIGHT = 600;
+const SDL_Point BOARD_POS = { 50, 50 };
+
 static SDL_Window *gWindow = nullptr;
 static SDL_Renderer *gRenderer = nullptr;
 

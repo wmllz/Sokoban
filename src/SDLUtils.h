@@ -13,7 +13,7 @@
 
 extern const int SCREEN_WIDTH;
 extern const int SCREEN_HEIGHT;
-
+extern const SDL_Point BOARD_POS;
 bool initSDL(const std::string &winName);
 void closeSDL();
 

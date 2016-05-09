@@ -22,6 +22,8 @@ public:
 		SDL_Texture *texture, 
 		const SDL_Rect *srcrect,
 		const SDL_Rect *dstrect);
+	void drawRect(const SDL_Rect &rect);
+	
 	void renderPresent();
 
 private:
