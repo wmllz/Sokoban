@@ -1,0 +1,75 @@
+#include "Game.h"
+
+/*
+**构造函数
+*/
+Game::Game(){
+
+	m_level = 1;
+	m_board = nullptr;
+	m_man = nullptr;
+	loadMap();
+}
+
+//void Game::init(int level){
+//	m_level = level;
+//
+//	//load 相应的map
+//}
+
+/*
+**功能：开始游戏，创建游戏面板，
+**并在在游戏面板上加载地图，并返回当前人物所在的单元格
+*/
+void Game::start(){
+	m_board = new Board(BOARD_POS);
+	m_man = m_board->loadMap(m_curMap);
+}
+
+//void Game::save(){
+//
+//}
+
+//void Game::nextLevel(){
+//
+//}
+
+/*
+**功能：从文件中加载地图
+*/
+void Game::loadMap(){
+	
+	CSVTable table;
+	string path = "map.csv";
+
+	FileIO input(path, FORMAT_CSV);
+	input.open();
+	table = input.getTable();
+
+	for (int i = 0; i < 10; i++){
+		for (int j = 0; j < 10; j++){
+			m_curMap[i][j] = atoi(table[i][j].c_str());
+			cout << m_curMap[i][j] << ends;
+		}
+		cout << endl;
+	}
+}
+
+void Game::move(int x, int y){
+	m_board->moveCell(m_man, x, y);
+	//m_man->setRow(m_man->getRow() + x);
+	//m_man->setCol(m_man->getCol() + y);
+}
+
+Cell *Game::findMan(){
+	return nullptr;
+}
+
+void Game::render(){
+
+}
+
+void Game::gameOver(){
+
+}
+

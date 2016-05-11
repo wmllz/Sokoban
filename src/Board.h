@@ -8,27 +8,26 @@
 
 #include "Cell.h"
 
+//外部常量
 extern const int BoardRows;
 extern const int BoardCols;
 
-enum CellType{
-	Man, Wall, Box, Destination, Mixed
-};
-
 class Board{
+
 public:
 	Board(const SDL_Point &pos);
-	
-	void loadMap(int map[10][10]);
+	Cell *loadMap(int map[10][10]);
+	bool moveCell(Cell *&cell, int x, int y);
 	void render();
-	void calcW_H();
-private:
 
 private:
-	SDL_Point m_position;
-	int m_width;
-	int m_height;
-	Cell *m_board[10][10];
+	void calcW_H();
+
+private:
+	SDL_Point m_position;		//面板的位置坐标
+	int m_width;				//面板的宽度
+	int m_height;				//面板的高度
+	Cell *m_cells[10][10];		//指向面板单元格的指针
 
 };
 

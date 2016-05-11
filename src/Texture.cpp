@@ -54,7 +54,7 @@ void Texture::render( int x, int y, SDL_Rect *clip /*= nullptr*/ ){
 		renderQuad.h = clip->h;
 	}
 	gRender.renderCopy(m_texture, clip, &renderQuad);
-	gRender.renderPresent();
+	//gRender.renderPresent();
 }
 
 void Texture::free(){
