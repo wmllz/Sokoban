@@ -5,10 +5,13 @@
 */
 Game::Game(){
 
+	m_isOver = false;
+	m_isNextLevel = false;
 	m_level = 1;
 	m_board = nullptr;
 	m_man = nullptr;
 	loadMap();
+	m_board = new Board(BOARD_POS);
 }
 
 //void Game::init(int level){
@@ -22,7 +25,6 @@ Game::Game(){
 **并在在游戏面板上加载地图，并返回当前人物所在的单元格
 */
 void Game::start(){
-	m_board = new Board(BOARD_POS);
 	m_man = m_board->loadMap(m_curMap);
 }
 
@@ -30,9 +32,13 @@ void Game::start(){
 //
 //}
 
-//void Game::nextLevel(){
-//
-//}
+bool Game::isNextLevel(){
+	return m_isNextLevel;
+}
+
+void Game::nextLevel(){
+	loadMap();
+}
 
 /*
 **功能：从文件中加载地图
@@ -57,19 +63,15 @@ void Game::loadMap(){
 
 void Game::move(int x, int y){
 	m_board->moveCell(m_man, x, y);
-	//m_man->setRow(m_man->getRow() + x);
-	//m_man->setCol(m_man->getCol() + y);
+	m_isNextLevel = m_board->isOver();
 }
 
-Cell *Game::findMan(){
-	return nullptr;
-}
 
 void Game::render(){
 
 }
 
-void Game::gameOver(){
-
+bool Game::gameOver(){
+	return false;
 }
 

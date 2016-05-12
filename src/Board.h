@@ -18,6 +18,7 @@ public:
 	Board(const SDL_Point &pos);
 	Cell *loadMap(int map[10][10]);
 	bool moveCell(Cell *&cell, int x, int y);
+	bool isOver();
 	void render();
 
 private:
@@ -27,6 +28,7 @@ private:
 	SDL_Point m_position;		//面板的位置坐标
 	int m_width;				//面板的宽度
 	int m_height;				//面板的高度
+	std::vector<Cell *> m_destinations;//存储该地图中所有的目的地
 	Cell *m_cells[10][10];		//指向面板单元格的指针
 
 };
