@@ -49,7 +49,6 @@ void Game::nextLevel(){
 void Game::loadMap(){
 	
 	CSVTable table;
-	int temp = m_fs.getPosition();
 	
 	m_fs.open(m_fs.getPosition());
 	
