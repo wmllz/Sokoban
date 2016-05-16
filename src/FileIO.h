@@ -21,11 +21,13 @@ typedef deque<TXTRow> TXTContent;
 
 class FileIO{
 public:
-
+	FileIO(){};
 	FileIO(const string &fileName, FileFormat format);
 	~FileIO(){};
 
-	void open();
+	void init(const string &fileName, FileFormat format);
+
+	void open(int position = 0);
 	void save();
 
 	void readTXTfile(ifstream &fs);
@@ -42,8 +44,9 @@ public:
 
 	CSVTable getTable(){ return m_table; }
 
-
+	int getPosition(){ return m_position; }
 private:
+	int m_position;
 	string m_fileName;
 	FileFormat m_fileFormat;
 	CSVTable m_table;

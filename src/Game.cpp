@@ -5,13 +5,15 @@
 */
 Game::Game(){
 
+	string path = "map.csv";
 	m_isOver = false;
 	m_isNextLevel = false;
 	m_level = 1;
 	m_board = nullptr;
 	m_man = nullptr;
-	loadMap();
 	m_board = new Board(BOARD_POS);
+	m_fs.init(path, FORMAT_CSV);
+	loadMap();
 }
 
 //void Game::init(int level){
@@ -38,6 +40,7 @@ bool Game::isNextLevel(){
 
 void Game::nextLevel(){
 	loadMap();
+	m_isNextLevel = false;
 }
 
 /*
@@ -46,11 +49,16 @@ void Game::nextLevel(){
 void Game::loadMap(){
 	
 	CSVTable table;
-	string path = "map.csv";
+	int temp = m_fs.getPosition();
+	
+	m_fs.open(m_fs.getPosition());
+	
+	table = m_fs.getTable();
 
-	FileIO input(path, FORMAT_CSV);
-	input.open();
-	table = input.getTable();
+	if (table.size() == 0){
+		m_isOver = true;
+		return;
+	}
 
 	for (int i = 0; i < 10; i++){
 		for (int j = 0; j < 10; j++){
@@ -72,6 +80,6 @@ void Game::render(){
 }
 
 bool Game::gameOver(){
-	return false;
+	return m_isOver;
 }
 

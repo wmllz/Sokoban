@@ -1,17 +1,24 @@
 #include "FileIO.h"
 
-/*
-**构造函数
-*/
+
 FileIO::FileIO(const string &fileName, FileFormat format){
+	init(fileName, format);
+}
+
+
+/*
+**功能：用于初始化
+*/
+void FileIO::init(const string &fileName, FileFormat format){
 	m_fileName = fileName;
 	m_fileFormat = format;
+	m_position = 0;
 }
 
 /*
 **功能：用于打开文件文件流，并且读取流中的数据
 */
-void FileIO::open(){
+void FileIO::open(int position){
 	ifstream input(m_fileName.c_str(), ios::in);
 
 	if (!input.is_open()){
@@ -19,6 +26,7 @@ void FileIO::open(){
 		return;
 	}
 
+	input.seekg(position, input.beg);
 	switch (m_fileFormat){
 	case FORMAT_TXT:
 		readTXTfile(input);
@@ -91,8 +99,12 @@ void FileIO::readCSVfile(ifstream &fs){
 		row = getRowFromCSV(fs);
 
 		if (!row.empty()){
+			if (row.size() == 1){
+				return;
+			}
 			m_table.push_back(row);
 		}
+
 	}
 }
 
@@ -105,6 +117,7 @@ TXTRow FileIO::getRowFromTXT(ifstream &fs){
 
 	TXTRow row;
 	getline(fs, row);
+	m_position = fs.tellg();
 	return row;
 }
 
@@ -122,6 +135,7 @@ CSVRow FileIO::getRowFromCSV(ifstream &fs){
 
 	getline(fs, line);
 
+	m_position = fs.tellg();
 	while (line.size() > 0 && pos != line.npos){
 		if (pos > 0){
 			prePos = pos + 1;
@@ -130,13 +144,10 @@ CSVRow FileIO::getRowFromCSV(ifstream &fs){
 		pos = line.find(',', prePos);
 		row.push_back(line.substr(prePos, pos - prePos));
 	}
+
 	return row;
 }
 
-/*
-**功能：将m_content中的数据保存到txt文件中
-**@param	fs	打开的输出文件流
-*/
 void FileIO::writeTXTfile(ofstream &fs){
 	TXTContent::iterator it;
 	for (it = m_content.begin(); it != m_content.end(); it++){

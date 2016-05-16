@@ -26,6 +26,8 @@ private:
 	int m_level;			//сно╥╣д╧ь©╗
 	int m_curMap[10][10];	
 	
+	FileIO m_fs;
+	
 	SDL_Point m_manPos;
 	Cell *m_man;
 	Board *m_board;

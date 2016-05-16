@@ -50,6 +50,9 @@ int main(int argc, char *argv[]){
 				}
 			}
 			gRender.renderPresent();
+			if (g.gameOver()){
+				break;
+			}
 			if (g.isNextLevel()){
 				g.nextLevel();
 				g.start();
